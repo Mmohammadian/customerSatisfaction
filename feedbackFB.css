@@ -1,0 +1,118 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --accent-color: #2ecc71;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --pulse-color: rgba(46, 204, 113, 0.5);
+}
+
+.feedback-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    z-index: 999;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    animation: pulse 2s infinite;
+}
+
+.feedback-fab:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 6px 16px var(--shadow-color);
+}
+
+.feedback-fab:active {
+    transform: scale(0.95);
+}
+
+.feedback-fab i {
+    transition: transform 0.3s ease;
+}
+
+.feedback-fab:hover i {
+    transform: scale(1.2);
+}
+
+/* پالس انیمیشن برای جلب توجه */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--pulse-color);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+/* حالت‌های مختلف دکمه */
+.feedback-fab.success {
+    background-color: var(--accent-color);
+    animation: none;
+}
+
+.feedback-fab.success:hover {
+    background-color: #27ae60;
+}
+
+.feedback-fab.warning {
+    background-color: #f39c12;
+    animation: none;
+}
+
+.feedback-fab.warning:hover {
+    background-color: #e67e22;
+}
+
+/* برای صفحات RTL */
+[dir="rtl"] .feedback-fab {
+    right: auto;
+    left: 30px;
+}
+.report-star-rating {
+  font-size: 18px;
+  color: #ccc;
+  display: inline-block;
+  direction: ltr; /* برای درست چیدن ستاره‌ها */
+}
+
+.report-star-rating .star {
+  position: relative;
+  display: inline-block;
+  color: #ccc;
+  cursor: default;
+  font-size: 18px;
+  user-select: none;
+}
+
+.report-star-rating .star.full {
+  color: gold;
+}
+
+.report-star-rating .star.half {
+  color: #ccc;
+}
+
+.report-star-rating .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: gold;
+  pointer-events: none;
+}
