@@ -1,4 +1,4 @@
-﻿create or replace procedure prc_ins_feedback(
+create or replace procedure prc_ins_feedback(
     p_json     clob,
     p_app_id   number default null,
     p_page_id  number default null,
