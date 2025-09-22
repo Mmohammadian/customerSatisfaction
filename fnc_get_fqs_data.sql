@@ -1,19 +1,20 @@
-﻿create or replace function fnc_get_fqs_data(p_app_id number)
+create or replace function fnc_get_fqs_data(p_app_id number, p_page_id number)
 return clob
 as 
     cursor c_fqs is
-        select  fqs.id, fqs.question
+        select  fqs.id, replace(fqs.question,'#TITLE#' , apg.page_title) as question
         from    tb_feedback_question fqs
-        where   fqs.fk_flk_fqs_type = 1
+        join    apex_application_pages apg on apg.application_id = fqs.app_id and apg.page_id = p_page_id
+        where   fqs.fk_flk_fqs_type = 2
         and     fqs.is_active = 1
         and     (trunc(fqs.deactive_date) >= trunc(sysdate) or fqs.deactive_date is null)
         and     fqs.APP_ID = p_app_id;
         
     cursor c_opt(p_fk_fqs number) is
-        select  opt.id, opt.answer
-        from    tb_feedback_options opt
-        where   fk_fqs = p_fk_fqs
-        and     void_date is null;
+        select opt.id, opt.answer
+        from tb_feedback_options opt
+        where fk_fqs = p_fk_fqs
+          and void_date is null;
     v_result_json clob;
 begin
     apex_json.initialize_clob_output;
